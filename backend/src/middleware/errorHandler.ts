@@ -10,7 +10,8 @@ export function errorHandler(
   res: Response,
   next: NextFunction
 ): Response {
-  console.error(`[Error] ${req.method} ${req.url}:`, err);
+  const errorMessage = err ? err.message || String(err) : 'Unknown error';
+  console.error(`[Error] ${req.method} ${req.url}: ${errorMessage}`);
 
   // 1. Handled Custom Application Errors
   if (err instanceof AppError) {
