@@ -14,6 +14,8 @@ import { CustomerDetailsPage } from './pages/CustomerDetailsPage';
 import { ProductsPage } from './pages/ProductsPage';
 import { InventoryPage } from './pages/InventoryPage';
 import { ChallansPage } from './pages/ChallansPage';
+import { CreateChallanPage } from './pages/CreateChallanPage';
+import { ChallanDetailsPage } from './pages/ChallanDetailsPage';
 import { UsersPage } from './pages/UsersPage';
 
 export default function App() {
@@ -35,6 +37,8 @@ export default function App() {
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/inventory" element={<InventoryPage />} />
                 <Route path="/challans" element={<ChallansPage />} />
+                <Route path="/challans/new" element={<CreateChallanPage />} />
+                <Route path="/challans/:id" element={<ChallanDetailsPage />} />
 
                 {/* Admin Only Route */}
                 <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
