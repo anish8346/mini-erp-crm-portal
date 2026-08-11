@@ -97,20 +97,20 @@ export const ProductsPage: React.FC = () => {
   const columns: Column<Product>[] = [
     {
       header: 'Product Name',
-      accessor: (row) => <span className="font-bold text-slate-100">{row.productName}</span>,
+      accessor: (row) => <span className="font-semibold text-[#1B1C1C]">{row.productName}</span>,
     },
     {
       header: 'SKU',
-      accessor: (row) => <span className="font-mono text-xs text-indigo-400 font-semibold">{row.sku}</span>,
+      accessor: (row) => <span className="font-mono text-xs text-[#4E635A] font-semibold">{row.sku}</span>,
     },
     {
       header: 'Category',
-      accessor: (row) => <span className="text-xs text-slate-300">{row.category}</span>,
+      accessor: (row) => <span className="text-xs text-[#424845]">{row.category}</span>,
     },
     {
       header: 'Unit Price',
       accessor: (row) => (
-        <span className="font-semibold text-slate-200">
+        <span className="font-semibold text-[#1B1C1C]">
           ₹{row.unitPrice.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
         </span>
       ),
@@ -120,7 +120,7 @@ export const ProductsPage: React.FC = () => {
       accessor: (row) => (
         <span
           className={`font-bold font-mono ${
-            row.currentStock <= row.minimumStock ? 'text-rose-400' : 'text-slate-100'
+            row.currentStock <= row.minimumStock ? 'text-[#BA1A1A]' : 'text-[#1B1C1C]'
           }`}
         >
           {row.currentStock}
@@ -129,11 +129,11 @@ export const ProductsPage: React.FC = () => {
     },
     {
       header: 'Min Threshold',
-      accessor: (row) => <span className="text-xs font-mono text-slate-400">{row.minimumStock}</span>,
+      accessor: (row) => <span className="text-xs font-mono text-[#727875]">{row.minimumStock}</span>,
     },
     {
       header: 'Warehouse',
-      accessor: (row) => <span className="text-xs text-slate-400">{row.warehouse || 'Main Storage'}</span>,
+      accessor: (row) => <span className="text-xs text-[#727875]">{row.warehouse || 'Main Storage'}</span>,
     },
     {
       header: 'Stock Status',
@@ -160,7 +160,7 @@ export const ProductsPage: React.FC = () => {
                 title="Edit Product"
                 onClick={() => handleOpenEditModal(row)}
               >
-                <Edit2 className="w-4 h-4 text-amber-400" />
+                <Edit2 className="w-4 h-4 text-[#7D562D]" />
               </Button>
               <Button
                 variant="ghost"
@@ -168,7 +168,7 @@ export const ProductsPage: React.FC = () => {
                 title="Delete Product"
                 onClick={() => setDeleteTarget(row)}
               >
-                <Trash2 className="w-4 h-4 text-rose-400" />
+                <Trash2 className="w-4 h-4 text-[#BA1A1A]" />
               </Button>
             </>
           )}
@@ -180,13 +180,13 @@ export const ProductsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8E4]">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-            <Package className="w-6 h-6 text-emerald-400" />
+          <h2 className="text-xl font-bold text-[#1B1C1C] flex items-center space-x-2">
+            <Package className="w-6 h-6 text-[#4E635A]" />
             <span>Product Master Catalog</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#727875] mt-1">
             Wholesale inventory items, SKUs, pricing & safety stock limits
           </p>
         </div>
@@ -199,7 +199,7 @@ export const ProductsPage: React.FC = () => {
       </div>
 
       {/* Search & Filter Toolbar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 bg-slate-900/60 p-4 border border-slate-800 rounded-2xl shadow-lg items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 bg-white p-4 border border-[#E2E8E4] rounded-lg shadow-2xs items-center">
         <div className="sm:col-span-2">
           <Input
             placeholder="Search product name, SKU, or category..."
@@ -208,7 +208,7 @@ export const ProductsPage: React.FC = () => {
               setSearch(e.target.value);
               setPage(1);
             }}
-            leftIcon={<Search className="w-4 h-4 text-slate-500" />}
+            leftIcon={<Search className="w-4 h-4 text-[#727875]" />}
           />
         </div>
 
@@ -236,9 +236,9 @@ export const ProductsPage: React.FC = () => {
               setLowStockFilter(e.target.checked);
               setPage(1);
             }}
-            className="w-4 h-4 rounded text-indigo-600 bg-slate-900 border-slate-700 focus:ring-indigo-500"
+            className="w-4 h-4 rounded text-[#4E635A] bg-white border-[#E2E8E4] focus:ring-[#4E635A]/20"
           />
-          <label htmlFor="lowStockToggle" className="text-xs font-semibold text-rose-300 cursor-pointer select-none">
+          <label htmlFor="lowStockToggle" className="text-xs font-medium text-[#BA1A1A] cursor-pointer select-none">
             Show Low Stock Only
           </label>
         </div>
@@ -289,11 +289,12 @@ export const ProductsPage: React.FC = () => {
           </>
         }
       >
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-[#1B1C1C]">
           Are you sure you want to delete product{' '}
-          <strong className="text-slate-100 font-bold">{deleteTarget?.productName}</strong> ({deleteTarget?.sku})?
+          <strong className="text-[#1B1C1C] font-bold">{deleteTarget?.productName}</strong> ({deleteTarget?.sku})?
         </p>
       </Modal>
     </div>
   );
 };
+

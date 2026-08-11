@@ -175,6 +175,28 @@ export class ProductService {
   public async deleteProduct(id: string) {
     await this.getProductById(id); // Throws if not found
 
+    // Check if referenced in ChallanItem
+    const challanItemCount = await prisma.challanItem.count({
+      where: { productId: id },
+    });
+
+    if (challanItemCount > 0) {
+      throw new ConflictError(
+        `Product cannot be deleted because it is referenced in ${challanItemCount} sales delivery challan(s).`
+      );
+    }
+
+    // Check if referenced in StockMovement
+    const stockMovementCount = await prisma.stockMovement.count({
+      where: { productId: id },
+    });
+
+    if (stockMovementCount > 0) {
+      throw new ConflictError(
+        `Product cannot be deleted because it has ${stockMovementCount} associated stock movement record(s).`
+      );
+    }
+
     return prisma.product.delete({
       where: { id },
     });

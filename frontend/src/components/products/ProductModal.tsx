@@ -207,12 +207,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         </div>
 
         {isEditing && product && (
-          <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs text-slate-400">
+          <div className="p-3 bg-[#F6F3F2] border border-[#E2E8E4] rounded flex items-center justify-between text-xs text-[#727875]">
             <span>Current Available Stock:</span>
-            <span className="font-bold text-slate-200 font-mono">{product.currentStock} units</span>
+            <span className="font-bold text-[#1B1C1C] font-mono">{product.currentStock} units</span>
           </div>
         )}
       </form>
     </Modal>
   );
 };
+

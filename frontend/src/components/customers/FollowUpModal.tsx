@@ -77,7 +77,7 @@ export const FollowUpModal: React.FC<FollowUpModalProps> = ({
       }
     >
       <form onSubmit={handleSubmit} className="space-y-4">
-        {error && <div className="text-xs text-rose-400 font-medium">{error}</div>}
+        {error && <div className="text-xs text-[#BA1A1A] font-medium">{error}</div>}
 
         <Input
           label="Next Scheduled Follow-up Date *"
@@ -88,13 +88,13 @@ export const FollowUpModal: React.FC<FollowUpModalProps> = ({
         />
 
         <div className="flex flex-col space-y-1.5">
-          <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+          <label className="text-xs font-medium text-[#424845] uppercase tracking-wider">
             Activity Note / Discussion Summary *
           </label>
           <textarea
             rows={4}
             required
-            className="w-full bg-slate-900 border border-slate-700 text-slate-100 text-sm rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-slate-500"
+            className="w-full bg-white border border-[#E2E8E4] text-[#1B1C1C] placeholder-[#727875] text-sm rounded p-3 focus:outline-none focus:ring-2 focus:ring-[#4E635A]/20 focus:border-[#4E635A]"
             placeholder="Details of call, pricing proposal sent, or client feedback..."
             value={note}
             onChange={(e) => setNote(e.target.value)}
@@ -104,3 +104,4 @@ export const FollowUpModal: React.FC<FollowUpModalProps> = ({
     </Modal>
   );
 };
+

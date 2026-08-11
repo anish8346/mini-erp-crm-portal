@@ -151,26 +151,26 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
     >
       {isConfirming && activeProduct ? (
         <div className="space-y-4">
-          <div className="p-4 bg-slate-950 border border-slate-800 rounded-2xl space-y-3">
-            <h4 className="text-sm font-bold text-slate-100">Review Movement Details</h4>
+          <div className="p-4 bg-[#F6F3F2] border border-[#E2E8E4] rounded-lg space-y-3">
+            <h4 className="text-sm font-semibold text-[#1B1C1C]">Review Movement Details</h4>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div>
-                <span className="text-slate-400 block">Product:</span>
-                <span className="font-semibold text-slate-200">{activeProduct.productName}</span>
+                <span className="text-[#727875] block">Product:</span>
+                <span className="font-semibold text-[#1B1C1C]">{activeProduct.productName}</span>
               </div>
               <div>
-                <span className="text-slate-400 block">SKU:</span>
-                <span className="font-mono text-indigo-400 font-semibold">{activeProduct.sku}</span>
+                <span className="text-[#727875] block">SKU:</span>
+                <span className="font-mono text-[#4E635A] font-semibold">{activeProduct.sku}</span>
               </div>
               <div>
-                <span className="text-slate-400 block">Current Stock:</span>
-                <span className="font-mono font-bold text-slate-200">{activeProduct.currentStock}</span>
+                <span className="text-[#727875] block">Current Stock:</span>
+                <span className="font-mono font-bold text-[#1B1C1C]">{activeProduct.currentStock}</span>
               </div>
               <div>
-                <span className="text-slate-400 block">New Stock After {type}:</span>
+                <span className="text-[#727875] block">New Stock After {type}:</span>
                 <span
                   className={`font-mono font-bold ${
-                    type === 'IN' ? 'text-emerald-400' : 'text-amber-400'
+                    type === 'IN' ? 'text-[#2D5A27]' : 'text-[#7D562D]'
                   }`}
                 >
                   {type === 'IN'
@@ -180,16 +180,16 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
               </div>
             </div>
             {reason && (
-              <div className="text-xs border-t border-slate-800 pt-2 text-slate-400">
+              <div className="text-xs border-t border-[#E2E8E4] pt-2 text-[#727875]">
                 <span>Reason: </span>
-                <span className="text-slate-200 italic">{reason}</span>
+                <span className="text-[#1B1C1C] italic">{reason}</span>
               </div>
             )}
           </div>
         </div>
       ) : (
         <form onSubmit={handleStepToConfirm} className="space-y-4">
-          {error && <div className="text-xs text-rose-400 font-medium">{error}</div>}
+          {error && <div className="text-xs text-[#BA1A1A] font-medium">{error}</div>}
 
           {!product && allProducts.length > 0 ? (
             <Select
@@ -203,10 +203,10 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
             />
           ) : (
             activeProduct && (
-              <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl text-xs space-y-1">
-                <span className="text-slate-400">Target Product:</span>
-                <div className="font-bold text-slate-100">{activeProduct.productName}</div>
-                <div className="text-[11px] text-slate-400 font-mono">
+              <div className="p-3 bg-[#F6F3F2] border border-[#E2E8E4] rounded text-xs space-y-1">
+                <span className="text-[#727875]">Target Product:</span>
+                <div className="font-bold text-[#1B1C1C]">{activeProduct.productName}</div>
+                <div className="text-[11px] text-[#727875] font-mono">
                   SKU: {activeProduct.sku} • Current Stock: {activeProduct.currentStock} units
                 </div>
               </div>
@@ -238,3 +238,4 @@ export const StockMovementModal: React.FC<StockMovementModalProps> = ({
     </Modal>
   );
 };
+

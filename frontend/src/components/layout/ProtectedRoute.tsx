@@ -21,10 +21,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) 
 
   if (allowedRoles && allowedRoles.length > 0 && !hasRole(...allowedRoles)) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-6 bg-slate-900 border border-slate-800 rounded-2xl">
-        <h2 className="text-xl font-bold text-rose-400">Access Restricted (403 Forbidden)</h2>
-        <p className="text-xs text-slate-400 mt-2 max-w-md">
-          Your current account role <span className="font-semibold text-slate-200">({user?.role})</span> does not have permission to view this section.
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8 bg-white border border-[#E2E8E4] rounded-lg shadow-2xs">
+        <h2 className="text-xl font-semibold text-[#BA1A1A]">Access Restricted (403 Forbidden)</h2>
+        <p className="text-xs text-[#424845] mt-2 max-w-md">
+          Your current account role <span className="font-semibold text-[#1B1C1C]">({user?.role})</span> does not have permission to view this section.
         </p>
       </div>
     );
@@ -32,3 +32,4 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) 
 
   return <Outlet />;
 };
+

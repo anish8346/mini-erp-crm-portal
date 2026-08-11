@@ -110,21 +110,21 @@ export const InventoryPage: React.FC = () => {
       header: 'Product',
       accessor: (row) => (
         <div className="flex flex-col">
-          <span className="font-bold text-slate-100">{row.productName}</span>
-          <span className="text-[10px] text-slate-500 font-mono">{row.category}</span>
+          <span className="font-semibold text-[#1B1C1C]">{row.productName}</span>
+          <span className="text-[10px] text-[#727875] font-mono">{row.category}</span>
         </div>
       ),
     },
     {
       header: 'SKU',
-      accessor: (row) => <span className="font-mono text-xs text-indigo-400 font-semibold">{row.sku}</span>,
+      accessor: (row) => <span className="font-mono text-xs text-[#4E635A] font-semibold">{row.sku}</span>,
     },
     {
       header: 'Current Stock',
       accessor: (row) => (
         <span
           className={`font-bold font-mono text-sm ${
-            row.currentStock <= row.minimumStock ? 'text-rose-400' : 'text-slate-100'
+            row.currentStock <= row.minimumStock ? 'text-[#BA1A1A]' : 'text-[#1B1C1C]'
           }`}
         >
           {row.currentStock} units
@@ -133,11 +133,11 @@ export const InventoryPage: React.FC = () => {
     },
     {
       header: 'Min Threshold',
-      accessor: (row) => <span className="text-xs font-mono text-slate-400">{row.minimumStock}</span>,
+      accessor: (row) => <span className="text-xs font-mono text-[#727875]">{row.minimumStock}</span>,
     },
     {
       header: 'Warehouse',
-      accessor: (row) => <span className="text-xs text-slate-400">{row.warehouse || 'Main Bay'}</span>,
+      accessor: (row) => <span className="text-xs text-[#727875]">{row.warehouse || 'Main Bay'}</span>,
     },
     {
       header: 'Stock Status',
@@ -158,7 +158,7 @@ export const InventoryPage: React.FC = () => {
               <Button
                 variant="outline"
                 size="sm"
-                icon={<ArrowUpRight className="w-3.5 h-3.5 text-emerald-400" />}
+                icon={<ArrowUpRight className="w-3.5 h-3.5 text-[#2D5A27]" />}
                 onClick={() => handleOpenMovementModal('IN', row)}
               >
                 Stock IN
@@ -166,7 +166,7 @@ export const InventoryPage: React.FC = () => {
               <Button
                 variant="outline"
                 size="sm"
-                icon={<ArrowDownLeft className="w-3.5 h-3.5 text-amber-400" />}
+                icon={<ArrowDownLeft className="w-3.5 h-3.5 text-[#7D562D]" />}
                 onClick={() => handleOpenMovementModal('OUT', row)}
               >
                 Stock OUT
@@ -184,8 +184,8 @@ export const InventoryPage: React.FC = () => {
       header: 'Product',
       accessor: (row) => (
         <div className="flex flex-col">
-          <span className="font-semibold text-slate-200">{row.product?.productName || 'N/A'}</span>
-          <span className="text-[10px] text-slate-500 font-mono">{row.product?.sku}</span>
+          <span className="font-semibold text-[#1B1C1C]">{row.product?.productName || 'N/A'}</span>
+          <span className="text-[10px] text-[#727875] font-mono">{row.product?.sku}</span>
         </div>
       ),
     },
@@ -200,7 +200,7 @@ export const InventoryPage: React.FC = () => {
       accessor: (row) => (
         <span
           className={`font-bold font-mono ${
-            row.type === 'IN' ? 'text-emerald-400' : 'text-amber-400'
+            row.type === 'IN' ? 'text-[#2D5A27]' : 'text-[#7D562D]'
           }`}
         >
           {row.type === 'IN' ? '+' : '-'}{row.quantity}
@@ -209,21 +209,21 @@ export const InventoryPage: React.FC = () => {
     },
     {
       header: 'Reason / Ref',
-      accessor: (row) => <span className="text-xs text-slate-300">{row.reason || 'N/A'}</span>,
+      accessor: (row) => <span className="text-xs text-[#424845]">{row.reason || 'N/A'}</span>,
     },
     {
       header: 'Performed By',
       accessor: (row) => (
         <div className="flex flex-col text-xs">
-          <span className="font-medium text-slate-200">{row.creator?.name || 'System'}</span>
-          <span className="text-[10px] text-slate-500">{row.creator?.email}</span>
+          <span className="font-medium text-[#1B1C1C]">{row.creator?.name || 'System'}</span>
+          <span className="text-[10px] text-[#727875]">{row.creator?.email}</span>
         </div>
       ),
     },
     {
       header: 'Timestamp',
       accessor: (row) => (
-        <span className="text-xs text-slate-400 font-mono">
+        <span className="text-xs text-[#727875] font-mono">
           {new Date(row.createdAt).toLocaleString()}
         </span>
       ),
@@ -233,13 +233,13 @@ export const InventoryPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8E4]">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-            <Boxes className="w-6 h-6 text-amber-400" />
+          <h2 className="text-xl font-bold text-[#1B1C1C] flex items-center space-x-2">
+            <Boxes className="w-6 h-6 text-[#7D562D]" />
             <span>Inventory & Stock Ledger</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#727875] mt-1">
             Real-time stock ledger, inward (IN) arrivals, outward (OUT) dispatches & audit history
           </p>
         </div>
@@ -257,7 +257,7 @@ export const InventoryPage: React.FC = () => {
             <Button
               variant="secondary"
               size="md"
-              icon={<ArrowDownLeft className="w-4 h-4 text-amber-400" />}
+              icon={<ArrowDownLeft className="w-4 h-4 text-[#7D562D]" />}
               onClick={() => handleOpenMovementModal('OUT')}
             >
               Issue Stock (OUT)
@@ -268,14 +268,14 @@ export const InventoryPage: React.FC = () => {
 
       {/* Low Stock Warning Banner */}
       {lowStockProducts.length > 0 && (
-        <div className="p-4 bg-rose-950/30 border border-rose-800/50 rounded-2xl flex items-center justify-between flex-wrap gap-3">
-          <div className="flex items-center space-x-3 text-rose-300">
-            <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0" />
+        <div className="p-4 bg-[#FCE8E6] border border-[#FFDAD6] rounded-lg flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-center space-x-3 text-[#BA1A1A]">
+            <AlertTriangle className="w-5 h-5 text-[#BA1A1A] shrink-0" />
             <div>
               <span className="font-bold text-sm">
                 Low Stock Alert: {lowStockProducts.length} Product(s) Below Minimum Threshold!
               </span>
-              <p className="text-xs text-rose-300/80">
+              <p className="text-xs text-[#BA1A1A]/80">
                 {lowStockProducts.map((p) => `${p.productName} (${p.currentStock}/${p.minimumStock})`).join(', ')}
               </p>
             </div>
@@ -296,7 +296,7 @@ export const InventoryPage: React.FC = () => {
       {/* Section 1: Current Stock Ledger */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-base font-bold text-slate-100 flex items-center space-x-2">
+          <h3 className="text-base font-semibold text-[#1B1C1C] flex items-center space-x-2">
             <span>Live Stock Balances</span>
           </h3>
           <div className="max-w-xs w-full">
@@ -304,7 +304,7 @@ export const InventoryPage: React.FC = () => {
               placeholder="Search product or SKU..."
               value={productSearch}
               onChange={(e) => setProductSearch(e.target.value)}
-              leftIcon={<Search className="w-4 h-4 text-slate-500" />}
+              leftIcon={<Search className="w-4 h-4 text-[#727875]" />}
             />
           </div>
         </div>
@@ -319,11 +319,11 @@ export const InventoryPage: React.FC = () => {
       </div>
 
       {/* Section 2: Stock Movement Audit History */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-800">
+      <div className="bg-white border border-[#E2E8E4] rounded-lg p-6 shadow-2xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#E2E8E4]">
           <div className="flex items-center space-x-2">
-            <History className="w-5 h-5 text-indigo-400" />
-            <h3 className="text-base font-bold text-slate-100">Stock Movements Audit Log</h3>
+            <History className="w-5 h-5 text-[#4E635A]" />
+            <h3 className="text-base font-semibold text-[#1B1C1C]">Stock Movements Audit Log</h3>
           </div>
 
           <div className="flex items-center space-x-3">
@@ -384,3 +384,4 @@ export const InventoryPage: React.FC = () => {
     </div>
   );
 };
+

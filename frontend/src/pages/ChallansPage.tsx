@@ -108,7 +108,7 @@ export const ChallansPage: React.FC = () => {
       accessor: (row) => (
         <button
           onClick={() => navigate(`/challans/${row.id}`)}
-          className="font-bold text-indigo-400 font-mono hover:underline text-left"
+          className="font-bold text-[#4E635A] font-mono hover:underline text-left"
         >
           {row.challanNumber}
         </button>
@@ -118,9 +118,9 @@ export const ChallansPage: React.FC = () => {
       header: 'Customer Account',
       accessor: (row) => (
         <div className="flex flex-col text-xs">
-          <span className="font-semibold text-slate-100">{row.customer?.customerName || 'N/A'}</span>
+          <span className="font-semibold text-[#1B1C1C]">{row.customer?.customerName || 'N/A'}</span>
           {row.customer?.businessName && (
-            <span className="text-[10px] text-slate-500">{row.customer.businessName}</span>
+            <span className="text-[10px] text-[#727875]">{row.customer.businessName}</span>
           )}
         </div>
       ),
@@ -128,7 +128,7 @@ export const ChallansPage: React.FC = () => {
     {
       header: 'Total Quantity',
       accessor: (row) => (
-        <span className="font-bold font-mono text-slate-200">{row.totalQuantity} units</span>
+        <span className="font-semibold font-mono text-[#1B1C1C]">{row.totalQuantity} units</span>
       ),
     },
     {
@@ -140,13 +140,13 @@ export const ChallansPage: React.FC = () => {
     {
       header: 'Created By',
       accessor: (row) => (
-        <span className="text-xs text-slate-300">{row.creator?.name || 'System'}</span>
+        <span className="text-xs text-[#424845]">{row.creator?.name || 'System'}</span>
       ),
     },
     {
       header: 'Created Date',
       accessor: (row) => (
-        <span className="text-xs text-slate-400 font-mono">
+        <span className="text-xs text-[#727875] font-mono">
           {new Date(row.createdAt).toLocaleDateString()}
         </span>
       ),
@@ -162,7 +162,7 @@ export const ChallansPage: React.FC = () => {
             title="View Details"
             onClick={() => navigate(`/challans/${row.id}`)}
           >
-            <Eye className="w-4 h-4 text-indigo-400" />
+            <Eye className="w-4 h-4 text-[#4E635A]" />
           </Button>
 
           {canManage && row.status === 'DRAFT' && (
@@ -175,7 +175,7 @@ export const ChallansPage: React.FC = () => {
                 setConfirmTarget(row);
               }}
             >
-              <CheckCircle className="w-4 h-4 text-emerald-400" />
+              <CheckCircle className="w-4 h-4 text-[#2D5A27]" />
             </Button>
           )}
 
@@ -189,7 +189,7 @@ export const ChallansPage: React.FC = () => {
                 setCancelTarget(row);
               }}
             >
-              <XCircle className="w-4 h-4 text-rose-400" />
+              <XCircle className="w-4 h-4 text-[#BA1A1A]" />
             </Button>
           )}
         </div>
@@ -200,13 +200,13 @@ export const ChallansPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8E4]">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-            <FileText className="w-6 h-6 text-purple-400" />
+          <h2 className="text-xl font-bold text-[#1B1C1C] flex items-center space-x-2">
+            <FileText className="w-6 h-6 text-[#4E635A]" />
             <span>Sales Delivery Challans</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#727875] mt-1">
             Dispatch documents, item snapshots, stock verification & confirmation workflow
           </p>
         </div>
@@ -224,7 +224,7 @@ export const ChallansPage: React.FC = () => {
       </div>
 
       {/* Toolbar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-900/60 p-4 border border-slate-800 rounded-2xl shadow-lg items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 border border-[#E2E8E4] rounded-lg shadow-2xs items-center">
         <div className="sm:col-span-2">
           <Input
             placeholder="Search by Challan # (e.g. CH-000001) or customer name..."
@@ -233,7 +233,7 @@ export const ChallansPage: React.FC = () => {
               setSearch(e.target.value);
               setPage(1);
             }}
-            leftIcon={<Search className="w-4 h-4 text-slate-500" />}
+            leftIcon={<Search className="w-4 h-4 text-[#727875]" />}
           />
         </div>
 
@@ -290,10 +290,10 @@ export const ChallansPage: React.FC = () => {
         }
       >
         <div className="space-y-3">
-          {actionError && <div className="text-xs text-rose-400 font-medium">{actionError}</div>}
-          <p className="text-sm text-slate-300">
+          {actionError && <div className="text-xs text-[#BA1A1A] font-medium">{actionError}</div>}
+          <p className="text-sm text-[#1B1C1C]">
             Confirm challan{' '}
-            <strong className="text-indigo-400 font-bold font-mono">{confirmTarget?.challanNumber}</strong>?
+            <strong className="text-[#4E635A] font-bold font-mono">{confirmTarget?.challanNumber}</strong>?
           </p>
         </div>
       </Modal>
@@ -317,13 +317,14 @@ export const ChallansPage: React.FC = () => {
         }
       >
         <div className="space-y-3">
-          {actionError && <div className="text-xs text-rose-400 font-medium">{actionError}</div>}
-          <p className="text-sm text-slate-300">
+          {actionError && <div className="text-xs text-[#BA1A1A] font-medium">{actionError}</div>}
+          <p className="text-sm text-[#1B1C1C]">
             Are you sure you want to cancel challan{' '}
-            <strong className="text-rose-400 font-bold font-mono">{cancelTarget?.challanNumber}</strong>?
+            <strong className="text-[#BA1A1A] font-bold font-mono">{cancelTarget?.challanNumber}</strong>?
           </p>
         </div>
       </Modal>
     </div>
   );
 };
+

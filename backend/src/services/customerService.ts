@@ -1,6 +1,6 @@
 import { Prisma, CustomerStatus, CustomerType } from '@prisma/client';
 import { prisma } from '../config/prisma';
-import { NotFoundError } from '../utils/errors';
+import { NotFoundError, ConflictError } from '../utils/errors';
 import {
   CreateCustomerInput,
   UpdateCustomerInput,
@@ -138,6 +138,28 @@ export class CustomerService {
 
   public async deleteCustomer(id: string) {
     await this.getCustomerById(id); // Throws if not found
+
+    // Check if customer has associated sales challans
+    const challanCount = await prisma.challan.count({
+      where: { customerId: id },
+    });
+
+    if (challanCount > 0) {
+      throw new ConflictError(
+        `Customer cannot be deleted because they are associated with ${challanCount} sales delivery challan(s).`
+      );
+    }
+
+    // Check if customer has follow-up logs
+    const followUpCount = await prisma.followUp.count({
+      where: { customerId: id },
+    });
+
+    if (followUpCount > 0) {
+      throw new ConflictError(
+        `Customer cannot be deleted because they have ${followUpCount} associated CRM follow-up record(s).`
+      );
+    }
 
     return prisma.customer.delete({
       where: { id },

@@ -107,13 +107,13 @@ export const CustomersPage: React.FC = () => {
         <div className="flex flex-col">
           <button
             onClick={() => navigate(`/customers/${row.id}`)}
-            className="font-bold text-slate-100 hover:text-indigo-400 text-left transition-colors"
+            className="font-bold text-[#1B1C1C] hover:text-[#4E635A] text-left transition-colors"
           >
             {row.customerName}
           </button>
           {row.email && (
-            <span className="text-[11px] text-slate-400 flex items-center space-x-1 mt-0.5">
-              <Mail className="w-3 h-3 text-slate-500 shrink-0" />
+            <span className="text-[11px] text-[#727875] flex items-center space-x-1 mt-0.5">
+              <Mail className="w-3 h-3 text-[#727875] shrink-0" />
               <span className="truncate">{row.email}</span>
             </span>
           )}
@@ -124,11 +124,11 @@ export const CustomersPage: React.FC = () => {
       header: 'Business / GST',
       accessor: (row) => (
         <div className="flex flex-col text-xs">
-          <span className="font-medium text-slate-200">{row.businessName || 'Individual'}</span>
+          <span className="font-medium text-[#1B1C1C]">{row.businessName || 'Individual'}</span>
           {row.gstNumber ? (
-            <span className="text-[10px] text-indigo-400 font-mono mt-0.5">{row.gstNumber}</span>
+            <span className="text-[10px] text-[#4E635A] font-mono mt-0.5">{row.gstNumber}</span>
           ) : (
-            <span className="text-[10px] text-slate-500">Unregistered</span>
+            <span className="text-[10px] text-[#727875]">Unregistered</span>
           )}
         </div>
       ),
@@ -136,8 +136,8 @@ export const CustomersPage: React.FC = () => {
     {
       header: 'Mobile',
       accessor: (row) => (
-        <div className="flex items-center space-x-1.5 text-xs text-slate-300 font-mono">
-          <Phone className="w-3 h-3 text-slate-500 shrink-0" />
+        <div className="flex items-center space-x-1.5 text-xs text-[#1B1C1C] font-mono">
+          <Phone className="w-3 h-3 text-[#727875] shrink-0" />
           <span>{row.mobileNumber}</span>
         </div>
       ),
@@ -157,8 +157,8 @@ export const CustomersPage: React.FC = () => {
     {
       header: 'Follow-up Date',
       accessor: (row) => (
-        <div className="flex items-center space-x-1.5 text-xs text-slate-400">
-          <Calendar className="w-3 h-3 text-slate-500 shrink-0" />
+        <div className="flex items-center space-x-1.5 text-xs text-[#424845]">
+          <Calendar className="w-3 h-3 text-[#727875] shrink-0" />
           <span>
             {row.followUpDate ? new Date(row.followUpDate).toLocaleDateString() : 'None Scheduled'}
           </span>
@@ -176,7 +176,7 @@ export const CustomersPage: React.FC = () => {
             title="View Details"
             onClick={() => navigate(`/customers/${row.id}`)}
           >
-            <Eye className="w-4 h-4 text-indigo-400" />
+            <Eye className="w-4 h-4 text-[#4E635A]" />
           </Button>
 
           {canEdit && (
@@ -186,7 +186,7 @@ export const CustomersPage: React.FC = () => {
               title="Edit Customer"
               onClick={() => handleOpenEditModal(row)}
             >
-              <Edit2 className="w-4 h-4 text-amber-400" />
+              <Edit2 className="w-4 h-4 text-[#7D562D]" />
             </Button>
           )}
 
@@ -197,7 +197,7 @@ export const CustomersPage: React.FC = () => {
               title="Delete Customer"
               onClick={() => setDeleteTarget(row)}
             >
-              <Trash2 className="w-4 h-4 text-rose-400" />
+              <Trash2 className="w-4 h-4 text-[#BA1A1A]" />
             </Button>
           )}
         </div>
@@ -208,13 +208,13 @@ export const CustomersPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8E4]">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-            <Users className="w-6 h-6 text-indigo-400" />
+          <h2 className="text-xl font-bold text-[#1B1C1C] flex items-center space-x-2">
+            <Users className="w-6 h-6 text-[#4E635A]" />
             <span>Customer CRM Accounts</span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#727875] mt-1">
             Wholesale buyers, distributors, leads, and CRM activity logs
           </p>
         </div>
@@ -227,7 +227,7 @@ export const CustomersPage: React.FC = () => {
       </div>
 
       {/* Filter & Search Toolbar */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 bg-slate-900/60 p-4 border border-slate-800 rounded-2xl shadow-lg">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 bg-white p-4 border border-[#E2E8E4] rounded-lg shadow-2xs">
         <div className="sm:col-span-2">
           <Input
             placeholder="Search customer name, mobile, email, or business..."
@@ -236,7 +236,7 @@ export const CustomersPage: React.FC = () => {
               setSearch(e.target.value);
               setPage(1);
             }}
-            leftIcon={<Search className="w-4 h-4 text-slate-500" />}
+            leftIcon={<Search className="w-4 h-4 text-[#727875]" />}
           />
         </div>
 
@@ -314,11 +314,12 @@ export const CustomersPage: React.FC = () => {
           </>
         }
       >
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-[#1B1C1C]">
           Are you sure you want to permanently delete customer account{' '}
-          <strong className="text-slate-100 font-bold">{deleteTarget?.customerName}</strong>?
+          <strong className="text-[#1B1C1C] font-bold">{deleteTarget?.customerName}</strong>?
         </p>
       </Modal>
     </div>
   );
 };
+

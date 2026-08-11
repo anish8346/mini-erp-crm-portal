@@ -55,7 +55,11 @@ export const CreateChallanPage: React.FC = () => {
           productService.getProducts({ limit: 100 }),
         ]);
         setCustomers(custRes.customers);
-        setProducts(prodRes.products);
+        const parsedProducts = prodRes.products.map((p) => ({
+          ...p,
+          unitPrice: Number(p.unitPrice),
+        }));
+        setProducts(parsedProducts);
 
         if (custRes.customers.length > 0) {
           setSelectedCustomerId(custRes.customers[0].id);
@@ -90,6 +94,7 @@ export const CreateChallanPage: React.FC = () => {
     if (existingIndex >= 0) {
       const updated = [...draftItems];
       updated[existingIndex].quantity += qtyNum;
+      updated[existingIndex].unitPrice = Number(activeProduct.unitPrice);
       setDraftItems(updated);
     } else {
       setDraftItems((prev) => [
@@ -98,7 +103,7 @@ export const CreateChallanPage: React.FC = () => {
           productId: activeProduct.id,
           productName: activeProduct.productName,
           sku: activeProduct.sku,
-          unitPrice: activeProduct.unitPrice,
+          unitPrice: Number(activeProduct.unitPrice),
           currentStock: activeProduct.currentStock,
           quantity: qtyNum,
         },
@@ -154,7 +159,7 @@ export const CreateChallanPage: React.FC = () => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E2E8E4]">
         <div className="flex items-center space-x-3">
           <Button
             variant="ghost"
@@ -165,11 +170,11 @@ export const CreateChallanPage: React.FC = () => {
             Back to Challans
           </Button>
           <div>
-            <h2 className="text-xl font-bold text-slate-100 flex items-center space-x-2">
-              <FileText className="w-6 h-6 text-purple-400" />
+            <h2 className="text-xl font-bold text-[#1B1C1C] flex items-center space-x-2">
+              <FileText className="w-6 h-6 text-[#4E635A]" />
               <span>Create Sales Delivery Challan</span>
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-[#727875] mt-0.5">
               Draft challan creation does not modify stock. Stock is verified and deducted upon confirmation.
             </p>
           </div>
@@ -180,14 +185,14 @@ export const CreateChallanPage: React.FC = () => {
         {/* Left Column: Customer Selection & Product Picker */}
         <div className="lg:col-span-1 space-y-6">
           {/* Step 1: Customer Card */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-slate-100 flex items-center space-x-2">
-              <Building className="w-4 h-4 text-indigo-400" />
+          <div className="bg-white border border-[#E2E8E4] rounded-lg p-5 shadow-2xs space-y-4">
+            <h3 className="text-sm font-semibold text-[#1B1C1C] flex items-center space-x-2">
+              <Building className="w-4 h-4 text-[#4E635A]" />
               <span>Step 1: Select Customer</span>
             </h3>
 
             {customers.length === 0 ? (
-              <p className="text-xs text-rose-400">No customers found. Please add a customer first.</p>
+              <p className="text-xs text-[#BA1A1A]">No customers found. Please add a customer first.</p>
             ) : (
               <Select
                 label="Customer Account *"
@@ -202,14 +207,14 @@ export const CreateChallanPage: React.FC = () => {
           </div>
 
           {/* Step 2: Item Picker Card */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl space-y-4">
-            <h3 className="text-sm font-bold text-slate-100 flex items-center space-x-2">
-              <Package className="w-4 h-4 text-emerald-400" />
+          <div className="bg-white border border-[#E2E8E4] rounded-lg p-5 shadow-2xs space-y-4">
+            <h3 className="text-sm font-semibold text-[#1B1C1C] flex items-center space-x-2">
+              <Package className="w-4 h-4 text-[#4E635A]" />
               <span>Step 2: Add Products to Challan</span>
             </h3>
 
             {products.length === 0 ? (
-              <p className="text-xs text-rose-400">No catalog products found. Please add products first.</p>
+              <p className="text-xs text-[#BA1A1A]">No catalog products found. Please add products first.</p>
             ) : (
               <form onSubmit={handleAddItem} className="space-y-4">
                 <Select
@@ -223,22 +228,22 @@ export const CreateChallanPage: React.FC = () => {
                 />
 
                 {activeProduct && (
-                  <div className="p-3 bg-slate-950/60 border border-slate-800 rounded-xl text-xs space-y-1">
-                    <div className="flex items-center justify-between text-slate-400">
+                  <div className="p-3 bg-[#F6F3F2] border border-[#E2E8E4] rounded text-xs space-y-1">
+                    <div className="flex items-center justify-between text-[#727875]">
                       <span>SKU:</span>
-                      <span className="font-mono text-indigo-400 font-semibold">{activeProduct.sku}</span>
+                      <span className="font-mono text-[#4E635A] font-semibold">{activeProduct.sku}</span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-400">
+                    <div className="flex items-center justify-between text-[#727875]">
                       <span>Unit Price:</span>
-                      <span className="font-semibold text-slate-200">₹{activeProduct.unitPrice}</span>
+                      <span className="font-semibold text-[#1B1C1C]">₹{activeProduct.unitPrice}</span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-400">
+                    <div className="flex items-center justify-between text-[#727875]">
                       <span>Live Stock:</span>
                       <span
                         className={`font-mono font-bold ${
                           activeProduct.currentStock <= activeProduct.minimumStock
-                            ? 'text-amber-400'
-                            : 'text-emerald-400'
+                            ? 'text-[#7D562D]'
+                            : 'text-[#2D5A27]'
                         }`}
                       >
                         {activeProduct.currentStock} units
@@ -261,7 +266,7 @@ export const CreateChallanPage: React.FC = () => {
                   variant="secondary"
                   size="md"
                   className="w-full"
-                  icon={<Plus className="w-4 h-4 text-emerald-400" />}
+                  icon={<Plus className="w-4 h-4 text-[#4E635A]" />}
                 >
                   Add Item to Challan
                 </Button>
@@ -272,23 +277,23 @@ export const CreateChallanPage: React.FC = () => {
 
         {/* Right Column: Draft Items Table & Summary */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div className="bg-white border border-[#E2E8E4] rounded-lg p-6 shadow-2xs space-y-6">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2E8E4]">
               <div className="flex items-center space-x-2">
-                <ShoppingBag className="w-5 h-5 text-purple-400" />
-                <h3 className="text-base font-bold text-slate-100">Challan Line Items</h3>
+                <ShoppingBag className="w-5 h-5 text-[#4E635A]" />
+                <h3 className="text-base font-semibold text-[#1B1C1C]">Challan Line Items</h3>
               </div>
-              <span className="text-xs text-slate-400">{draftItems.length} Product(s) Added</span>
+              <span className="text-xs text-[#727875]">{draftItems.length} Product(s) Added</span>
             </div>
 
             {draftItems.length === 0 ? (
-              <div className="p-12 text-center border border-dashed border-slate-800 rounded-2xl text-slate-500 text-xs">
+              <div className="p-12 text-center border border-dashed border-[#E2E8E4] rounded text-[#727875] text-xs">
                 No items added yet. Select a product on the left to add items to this delivery challan.
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-slate-800/60 uppercase text-[10px] text-slate-400 font-semibold border-b border-slate-800">
+                <table className="w-full text-left text-xs text-[#1B1C1C]">
+                  <thead className="bg-[#F0EDED] uppercase text-[10px] text-[#424845] font-medium border-b border-[#E2E8E4]">
                     <tr>
                       <th className="px-3 py-3">Product</th>
                       <th className="px-3 py-3">SKU</th>
@@ -298,20 +303,20 @@ export const CreateChallanPage: React.FC = () => {
                       <th className="px-3 py-3 text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/60">
+                  <tbody className="divide-y divide-[#E2E8E4]">
                     {draftItems.map((item) => (
-                      <tr key={item.productId} className="hover:bg-slate-800/30">
-                        <td className="px-3 py-3 font-semibold text-slate-200">{item.productName}</td>
-                        <td className="px-3 py-3 font-mono text-indigo-400">{item.sku}</td>
+                      <tr key={item.productId} className="hover:bg-[#FCF9F8]">
+                        <td className="px-3 py-3 font-semibold text-[#1B1C1C]">{item.productName}</td>
+                        <td className="px-3 py-3 font-mono text-[#4E635A]">{item.sku}</td>
                         <td className="px-3 py-3 text-right">₹{item.unitPrice.toFixed(2)}</td>
-                        <td className="px-3 py-3 text-center font-bold text-slate-100">{item.quantity}</td>
-                        <td className="px-3 py-3 text-right font-bold text-slate-100">
+                        <td className="px-3 py-3 text-center font-bold text-[#1B1C1C]">{item.quantity}</td>
+                        <td className="px-3 py-3 text-right font-bold text-[#1B1C1C]">
                           ₹{(item.quantity * item.unitPrice).toFixed(2)}
                         </td>
                         <td className="px-3 py-3 text-right">
                           <button
                             onClick={() => handleRemoveItem(item.productId)}
-                            className="p-1 text-slate-400 hover:text-rose-400 transition-colors"
+                            className="p-1 text-[#727875] hover:text-[#BA1A1A] transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -325,15 +330,15 @@ export const CreateChallanPage: React.FC = () => {
 
             {/* Summary Footer */}
             {draftItems.length > 0 && (
-              <div className="pt-4 border-t border-slate-800 space-y-4">
-                <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 space-y-2 text-xs">
-                  <div className="flex justify-between text-slate-400">
+              <div className="pt-4 border-t border-[#E2E8E4] space-y-4">
+                <div className="bg-[#F6F3F2] p-4 rounded border border-[#E2E8E4] space-y-2 text-xs">
+                  <div className="flex justify-between text-[#727875]">
                     <span>Total Quantity:</span>
-                    <span className="font-bold text-slate-100 font-mono">{totalQuantity} units</span>
+                    <span className="font-bold text-[#1B1C1C] font-mono">{totalQuantity} units</span>
                   </div>
-                  <div className="flex justify-between text-slate-400 text-sm font-bold pt-2 border-t border-slate-800/80">
-                    <span className="text-slate-200">Grand Total Amount:</span>
-                    <span className="text-indigo-400 text-base">₹{grandTotal.toFixed(2)}</span>
+                  <div className="flex justify-between text-[#424845] text-sm font-bold pt-2 border-t border-[#E2E8E4]">
+                    <span className="text-[#1B1C1C]">Grand Total Amount:</span>
+                    <span className="text-[#4E635A] text-base">₹{grandTotal.toFixed(2)}</span>
                   </div>
                 </div>
 
@@ -355,3 +360,4 @@ export const CreateChallanPage: React.FC = () => {
     </div>
   );
 };
+

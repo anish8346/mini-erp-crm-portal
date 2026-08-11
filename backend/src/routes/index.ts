@@ -6,6 +6,7 @@ import productRoutes from './productRoutes';
 import inventoryRoutes from './inventoryRoutes';
 import challanRoutes from './challanRoutes';
 import dashboardRoutes from './dashboardRoutes';
+import userRoutes from './userRoutes';
 
 const apiRouter = Router();
 
@@ -29,5 +30,8 @@ apiRouter.use('/challans', challanRoutes);
 
 // Mount executive dashboard routes
 apiRouter.use('/dashboard', dashboardRoutes);
+
+// Mount user access management routes
+apiRouter.use('/users', userRoutes);
 
 export default apiRouter;

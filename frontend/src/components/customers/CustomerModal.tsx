@@ -230,12 +230,12 @@ export const CustomerModal: React.FC<CustomerModalProps> = ({
         />
 
         <div className="flex flex-col space-y-1.5">
-          <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+          <label className="text-xs font-medium text-[#424845] uppercase tracking-wider">
             Billing / Delivery Address
           </label>
           <textarea
             rows={2}
-            className="w-full bg-slate-900 border border-slate-700 text-slate-100 text-sm rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-white border border-[#E2E8E4] text-[#1B1C1C] placeholder-[#727875] text-sm rounded p-3 focus:outline-none focus:ring-2 focus:ring-[#4E635A]/20 focus:border-[#4E635A]"
             placeholder="Full physical address details..."
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
@@ -243,12 +243,12 @@ export const CustomerModal: React.FC<CustomerModalProps> = ({
         </div>
 
         <div className="flex flex-col space-y-1.5">
-          <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+          <label className="text-xs font-medium text-[#424845] uppercase tracking-wider">
             Account Notes
           </label>
           <textarea
             rows={2}
-            className="w-full bg-slate-900 border border-slate-700 text-slate-100 text-sm rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-white border border-[#E2E8E4] text-[#1B1C1C] placeholder-[#727875] text-sm rounded p-3 focus:outline-none focus:ring-2 focus:ring-[#4E635A]/20 focus:border-[#4E635A]"
             placeholder="Special billing, bulk discount, or delivery notes..."
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
@@ -258,3 +258,4 @@ export const CustomerModal: React.FC<CustomerModalProps> = ({
     </Modal>
   );
 };
+
