@@ -1,32 +1,22 @@
 import { api } from './api';
-import type { ApiResponse } from '../types';
+import type { ApiResponse, Product, Challan, StockMovement } from '../types';
 
 export interface DashboardMetrics {
-  totalCustomers: number;
-  activeLeads: number;
-  totalProducts: number;
-  lowStockCount: number;
-  totalChallans: number;
-  pendingDraftChallans: number;
-  recentActivities: any[];
+  kpis: {
+    totalCustomers: number;
+    totalProducts: number;
+    lowStockCount: number;
+    totalChallans: number;
+    todaysChallans: number;
+  };
+  recentChallans: Challan[];
+  lowStockProducts: Product[];
+  recentStockMovements: StockMovement[];
 }
 
 export const dashboardService = {
   getMetrics: async (): Promise<DashboardMetrics> => {
-    // For Phase 9/10 dashboard metrics endpoint
-    const res = await api.get<ApiResponse<DashboardMetrics>>('/dashboard/metrics').catch(() => ({
-      data: {
-        data: {
-          totalCustomers: 0,
-          activeLeads: 0,
-          totalProducts: 0,
-          lowStockCount: 0,
-          totalChallans: 0,
-          pendingDraftChallans: 0,
-          recentActivities: [],
-        },
-      },
-    }));
+    const res = await api.get<ApiResponse<DashboardMetrics>>('/dashboard/metrics');
     return res.data.data!;
   },
 };

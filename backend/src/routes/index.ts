@@ -5,6 +5,7 @@ import customerRoutes from './customerRoutes';
 import productRoutes from './productRoutes';
 import inventoryRoutes from './inventoryRoutes';
 import challanRoutes from './challanRoutes';
+import dashboardRoutes from './dashboardRoutes';
 
 const apiRouter = Router();
 
@@ -25,5 +26,8 @@ apiRouter.use('/inventory', inventoryRoutes);
 
 // Mount sales delivery challan routes
 apiRouter.use('/challans', challanRoutes);
+
+// Mount executive dashboard routes
+apiRouter.use('/dashboard', dashboardRoutes);
 
 export default apiRouter;

@@ -10,6 +10,7 @@ import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { CustomersPage } from './pages/CustomersPage';
+import { CustomerDetailsPage } from './pages/CustomerDetailsPage';
 import { ProductsPage } from './pages/ProductsPage';
 import { InventoryPage } from './pages/InventoryPage';
 import { ChallansPage } from './pages/ChallansPage';
@@ -30,6 +31,7 @@ export default function App() {
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/customers" element={<CustomersPage />} />
+                <Route path="/customers/:id" element={<CustomerDetailsPage />} />
                 <Route path="/products" element={<ProductsPage />} />
                 <Route path="/inventory" element={<InventoryPage />} />
                 <Route path="/challans" element={<ChallansPage />} />
