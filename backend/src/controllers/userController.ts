@@ -28,7 +28,7 @@ export class UserController {
 
   public async updateUser(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { id } = req.params;
+      const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
       const { role, isActive } = req.body;
       console.log('UpdateUser endpoint hit:', { id, role, isActive, reqUserId: req.user?.id });
 
