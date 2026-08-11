@@ -55,15 +55,37 @@ export class ProductService {
       ];
     }
 
-    // If lowStock is requested, apply filter where currentStock <= minimumStock
+    // Handle lowStock filtering (currentStock <= minimumStock)
     if (query.lowStock) {
-      // Use Prisma field comparison or raw query condition
-      (where as any).AND = [
-        Prisma.sql`"currentStock" <= "minimumStock"`,
-      ];
+      const allProducts = await prisma.product.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          _count: {
+            select: { stockMovements: true, challanItems: true },
+          },
+        },
+      });
+
+      const lowStockProducts = allProducts.filter((p) => p.currentStock <= p.minimumStock);
+      const totalCount = lowStockProducts.length;
+      const products = lowStockProducts.slice(skip, skip + limit);
+      const totalPages = Math.ceil(totalCount / limit) || 1;
+
+      return {
+        products,
+        pagination: {
+          page,
+          limit,
+          totalCount,
+          totalPages,
+          hasNextPage: page < totalPages,
+          hasPrevPage: page > 1,
+        },
+      };
     }
 
-    // Fetch total count and product list
+    // Standard pagination query
     const [totalCount, products] = await Promise.all([
       prisma.product.count({ where }),
       prisma.product.findMany({
