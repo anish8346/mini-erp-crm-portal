@@ -47,9 +47,10 @@ app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'healthy', uptime: process.uptime() });
 });
 
-// API Base Routes
+// API Base Routes (supports /api, /api/v1, or direct root endpoints like /auth/login)
 app.use('/api', apiRouter);
 app.use('/api/v1', apiRouter);
+app.use('/', apiRouter);
 
 // 404 Route Not Found Handler
 app.use(notFoundHandler);
