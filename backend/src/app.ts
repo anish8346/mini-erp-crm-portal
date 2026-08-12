@@ -29,6 +29,24 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// Root & Health Check Endpoints (for Render platform probes and keep-alive pingers)
+app.get('/', (_req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Mini ERP + CRM Backend API is online',
+    healthCheck: '/api/v1/health',
+    timestamp: new Date().toISOString(),
+  });
+});
+
+app.head('/', (_req, res) => {
+  res.status(200).end();
+});
+
+app.get('/health', (_req, res) => {
+  res.status(200).json({ status: 'healthy', uptime: process.uptime() });
+});
+
 // API Base Routes
 app.use('/api', apiRouter);
 app.use('/api/v1', apiRouter);

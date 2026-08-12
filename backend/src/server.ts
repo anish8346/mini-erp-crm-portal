@@ -10,6 +10,21 @@ async function startServer() {
     console.log(`📌 [Environment] ${env.NODE_ENV}`);
   });
 
+  // Automated Keep-Alive self-ping for Render Free Tier (every 5 minutes)
+  const renderUrl = process.env.RENDER_EXTERNAL_URL || 'https://fundsroom-erp-backend-5n1v.onrender.com';
+  const PING_INTERVAL = 5 * 60 * 1000; // 5 mins
+
+  setInterval(async () => {
+    try {
+      const response = await fetch(`${renderUrl}/health`);
+      if (response.ok) {
+        console.log(`📡 [KeepAlive] Ping successful to ${renderUrl}/health`);
+      }
+    } catch (error) {
+      console.warn('⚠️ [KeepAlive] Self-ping failed:', error instanceof Error ? error.message : error);
+    }
+  }, PING_INTERVAL);
+
   // Graceful shutdown handling
   const shutdown = async () => {
     console.log('\n⏳ Shutting down backend server gracefully...');
