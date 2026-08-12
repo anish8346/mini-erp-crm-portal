@@ -212,6 +212,9 @@ async function runFullSystemIntegrationTest() {
       },
     });
     const confirmBody = await confirmRes.json();
+    if (!confirmRes.ok || !confirmBody.success) {
+      throw new Error(`Confirm challan failed [${confirmRes.status}]: ${JSON.stringify(confirmBody)}`);
+    }
     console.log(`   ✅ Challan Confirmed: ${confirmBody.data.challan.challanNumber} (Status: ${confirmBody.data.challan.status})`);
 
     // Check reduced stock
@@ -297,7 +300,7 @@ async function runFullSystemIntegrationTest() {
     console.log('   ALL PHASE 14 FULL SYSTEM INTEGRATION TESTS PASSED 100%!');
     console.log('=======================================================\n');
   } catch (err) {
-    console.error('\n❌ INTEGRATION TEST FAILED:', err.message);
+    console.error('\n❌ INTEGRATION TEST FAILED:', err.message || err);
     process.exit(1);
   }
 }

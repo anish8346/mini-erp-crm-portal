@@ -229,6 +229,30 @@ All seeded accounts use password: **`Password@123`**
 
 ---
 
+## Deployment & Database Connection Troubleshooting
+
+### Cloud Deployment (Render / Railway / Supabase)
+
+#### 1. Supabase PostgreSQL Connection String Configuration
+When connecting Prisma to a hosted PostgreSQL instance on Supabase or Neon:
+- **Direct Connection / Session Mode (Recommended)**: Use Port `5432`
+  ```env
+  DATABASE_URL="postgresql://postgres.[REF]:[PASSWORD]@db.[REF].supabase.co:5432/postgres?connect_timeout=30"
+  ```
+- **Transaction Pooler Mode**: Use Port `6543` and append `?pgbouncer=true`
+  ```env
+  DATABASE_URL="postgresql://postgres.[REF]:[PASSWORD]@db.[REF].supabase.co:6543/postgres?pgbouncer=true&connect_timeout=30"
+  ```
+
+#### 2. Automatic Connection Retry Mechanism
+The backend (`src/config/prisma.ts`) contains built-in exponential backoff connection retries (5 attempts, 3s delay) during startup. If a cloud database is spinning up or experiencing connection pooler delays, the server automatically retries instead of crashing the deployment build.
+
+#### 3. Render Deployment Commands
+- **Build Command**: `npm install && npx prisma generate && npm run build`
+- **Start Command**: `npm start`
+
+---
+
 ## Postman Collection
 
 Import `postman/mini-erp.postman_collection.json` into Postman. It contains pre-configured requests with automated token saving:
